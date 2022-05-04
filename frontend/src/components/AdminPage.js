@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import VotingPage from './VotingPage';
-
+import Web3 from 'web3/dist/web3.min.js';
 
 const AdminPage = ({contract, startVote, endVote, accountType, address, enableContract, disableContract, contractLive, electionPhase_, candidates, posts, sendCandidatesData, setPage}) => {
 
@@ -17,7 +17,7 @@ const AdminPage = ({contract, startVote, endVote, accountType, address, enableCo
     const fileReader = new FileReader();
     const views = ['Whitelisting', `${electionPhase < 5 ? 'View Candidates' : 'View Results'}`, 'Vote Administration', 'Hand Over', 'Advanced'];
 
-
+    console.log(Web3.utils.fromAscii('20110529'));
     const handleStartVote = () => {
         if (candidates.length === 0) {
             alert('Voting can not start without candidates')
@@ -162,7 +162,7 @@ const AdminPage = ({contract, startVote, endVote, accountType, address, enableCo
 
     const handlePublishResults = async () => {
         try {
-            await contract.methods.publicResults().send({from : address})
+            await contract.methods.publicResults(0x3230313530363237000000000000000000000000000000000000000000000000).send({from : address})
             alert('Results set to Published');	
         } 
         catch (error) {

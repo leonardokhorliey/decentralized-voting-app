@@ -15,7 +15,7 @@ const VotingPage = ({posts, candidatesByPost, electionPhase, isAdminView, result
     }
 
     const setApprovedCandidates = (name, checker) => {
-        checker ? setToBeApproved([...toBeApproved, Number(name)]) : setVotes(toBeApproved.filter(t => t !== Number(name)));
+        checker ? setToBeApproved([...toBeApproved, Number(name)]) : setToBeApproved(toBeApproved.filter(t => t !== Number(name)));
         console.log(toBeApproved)
     }
 
@@ -39,7 +39,7 @@ const VotingPage = ({posts, candidatesByPost, electionPhase, isAdminView, result
     }
 
     const handleApproveCandidates = async () => {
-        if (votes.length < posts.length) {
+        if (toBeApproved.length < posts.length) {
             alert('You have not voted approved in all categories.')
             return;
         }
